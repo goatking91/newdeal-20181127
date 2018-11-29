@@ -5,7 +5,7 @@ import com.eomcs.lms.domain.Member;
 
 public class MemberHandler {
   
-  public static Scanner keyboard;
+  public Scanner keyboard;
   static final int LENGTH = 10;
   static Member[] members = new Member[LENGTH];
   static int memberIdx = 0;
