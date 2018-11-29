@@ -10,27 +10,25 @@ public class App {
 
   public static void main(String[] args) {
     
-    LessonHandler.keyboard = keyboard;
-    MemberHandler.keyboard = keyboard;
-    
-    
     BoardHandler b1 = new BoardHandler(keyboard);
     BoardHandler b2 = new BoardHandler(keyboard);
+    LessonHandler l1 = new LessonHandler(keyboard);
+    MemberHandler m1 = new MemberHandler(keyboard);
     
     while (true) {
       String command = prompt();
 
       if (command.equals("/lesson/add")) {
-        LessonHandler.addLesson();
+        l1.addLesson();
         
       } else if (command.equals("/lesson/list")) {
-        LessonHandler.listLesson();
+        l1.listLesson();
       
       } else if (command.equals("/member/add")) {
-        MemberHandler.addMember();
+        m1.addMember();
         
       } else if (command.equals("/member/list")) {
-        MemberHandler.listMember();
+        m1.listMember();
         
       } else if (command.equals("/board/add")) {
         b1.addBoard();
