@@ -10,6 +10,6 @@
 
 - github.com/eomcs/eomcs-java-project 에서 v1.5 과제 해결
 
-## 03 : 클래스와 데이터 타입
+## 04 : 클래스와 데이터 타입
 
 - github.com/eomcs/eomcs-java-project 에서 v1.6 과제 해결
