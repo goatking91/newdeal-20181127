@@ -1,13 +1,10 @@
 package com.eomcs.lms;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 import java.util.Stack;
-import com.eomcs.lms.domain.Lesson;
-import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.handler.BoardAddCommand;
 import com.eomcs.lms.handler.BoardDeleteCommand;
 import com.eomcs.lms.handler.BoardDetailCommand;
@@ -47,29 +44,27 @@ public class App {
         new BoardDeleteCommand(keyboard));
     commandMap.put("hello", new HelloCommand(keyboard));
 
-    ArrayList<Lesson> lessons = new ArrayList<>();
     commandMap.put("/lesson/list", 
-        new LessonListCommand(keyboard, lessons));
+        new LessonListCommand(keyboard));
     commandMap.put("/lesson/detail", 
-        new LessonDetailCommand(keyboard, lessons));
+        new LessonDetailCommand(keyboard));
     commandMap.put("/lesson/add", 
-        new LessonAddCommand(keyboard, lessons));
+        new LessonAddCommand(keyboard));
     commandMap.put("/lesson/update", 
-        new LessonUpdateCommand(keyboard, lessons));
+        new LessonUpdateCommand(keyboard));
     commandMap.put("/lesson/delete", 
-        new LessonDeleteCommand(keyboard, lessons));
+        new LessonDeleteCommand(keyboard));
 
-    LinkedList<Member> members = new LinkedList<>();
     commandMap.put("/member/list", 
-        new MemberListCommand(keyboard, members));
-    commandMap.put("/member/detail", 
-        new MemberDetailCommand(keyboard, members));
+        new MemberListCommand(keyboard));
+    commandMap.put("/member/detail",
+        new MemberDetailCommand(keyboard));
     commandMap.put("/member/add", 
-        new MemberAddCommand(keyboard, members));
+        new MemberAddCommand(keyboard));
     commandMap.put("/member/update", 
-        new MemberUpdateCommand(keyboard, members));
+        new MemberUpdateCommand(keyboard));
     commandMap.put("/member/delete", 
-        new MemberDeleteCommand(keyboard, members));
+        new MemberDeleteCommand(keyboard));
 
 
     while (true) {
