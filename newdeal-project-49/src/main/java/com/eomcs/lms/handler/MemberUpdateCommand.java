@@ -1,69 +1,46 @@
 package com.eomcs.lms.handler;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.Scanner;
-import org.mariadb.jdbc.Driver;
+import com.eomcs.lms.dao.MemberDao;
+import com.eomcs.lms.domain.Member;
 
 public class MemberUpdateCommand implements Command {
   Scanner keyboard;
+  MemberDao memberDao;
 
-  public MemberUpdateCommand(Scanner keyboard) {
+  public MemberUpdateCommand(Scanner keyboard, MemberDao memberDao) {
     this.keyboard = keyboard;
+    this.memberDao = memberDao;
   }
 
   @Override
   public void execute() {
-    Connection con = null;
-    Statement stmt = null; 
-
     try {
       System.out.print("번호? ");
-      String no = keyboard.nextLine();
-
-      DriverManager.registerDriver(new Driver());
-      con = DriverManager.getConnection(
-          "jdbc:mariadb://localhost:3306/studydb", "study", "1111");
-      stmt = con.createStatement();
-      ResultSet rs = stmt.executeQuery("select name, email, photo, tel"
-          + " from member"
-          + " where mno = " + no);
+      int no = Integer.parseInt(keyboard.nextLine());
+      Member member = memberDao.findByNo(no);
+      member.setNo(no);
       
-      rs.next();
-      
-      System.out.printf("이름(%s)? ", rs.getString("name"));
-      String name = keyboard.nextLine();
+      System.out.printf("이름(%s)? ", member.getName());
+      member.setName(keyboard.nextLine());
 
-      System.out.printf("이메일(%s)? ", rs.getString("email"));
-      String email = keyboard.nextLine();
+      System.out.printf("이메일(%s)? ",member.getEmail());
+      member.setEmail(keyboard.nextLine());
 
       System.out.printf("암호(********)? ");
-      String password = keyboard.nextLine();
+      member.setPassword(keyboard.nextLine());
 
-      System.out.printf("사진(%s)? ", rs.getString("photo"));
-      String photo = keyboard.nextLine();
+      System.out.printf("사진(%s)? ", member.getPhoto());
+      member.setPhoto(keyboard.nextLine());
 
-      System.out.printf("전화(%s)? ", rs.getString("tel"));
-      String tel = keyboard.nextLine();
+      System.out.printf("전화(%s)? ", member.getTel());
+      member.setTel(keyboard.nextLine());
 
-      rs.close();
-      stmt.executeUpdate("update member set"
-          + " name='" + name + "', email='" + email + "',"
-          + " pwd='" + password + "', photo='" + photo + "', tel='" + tel + "'"
-          + " where mno=" + no);
-
+      if(memberDao.update(member)>0)
       System.out.println("회원을 변경했습니다.");
-
-
-      System.out.println("저장하였습니다.");
 
     } catch (Exception e) {
       e.printStackTrace();
-    } finally {
-      try {stmt.close();} catch (Exception e) {}
-      try {con.close();} catch (Exception e) {}
     }
 
   }

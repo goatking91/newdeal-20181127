@@ -7,12 +7,15 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 import org.mariadb.jdbc.Driver;
+import com.eomcs.lms.dao.LessonDao;
 
 public class LessonListCommand implements Command {
   Scanner keyboard;
+  LessonDao lessonDao;
   
-  public LessonListCommand(Scanner keyboard) {
+  public LessonListCommand(Scanner keyboard, LessonDao lessonDao) {
     this.keyboard = keyboard;
+    this.lessonDao = lessonDao;
   }
   
   @Override

@@ -32,6 +32,7 @@
   <!-- SQL을 보관한 XML 파일 경로 -->
   <mappers>
     <mapper resource="com/eomcs/lms/mapper/BoardMapper.xml"/>
+    <mapper resource="com/eomcs/lms/mapper/LessonMapper.xml"/>
     <mapper resource="com/eomcs/lms/mapper/MemberMapper.xml"/>
   </mappers>
 </configuration>
