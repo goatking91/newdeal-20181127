@@ -73,8 +73,15 @@
 - SQL 삽입 공격을 이해하고 그 공격을 막아라!
 - Statement의 createStatement() 대신 PreparedStatement의 preparedStatement()를 사용하라.
 
-## 48 : MyBatis 도입
+## 49 : MyBatis 도입
 
 - 자바 소스에서 SQL 코드를 분리하라!
 - JDBC 코드를 캡슐화한 MyBatis로 대체해라!
 
+## 50 : Spring IoC Container 도입
+
+- 객체 생성과 소멸을 Spring IoC Container에게 맡겨라!
+
+## 51 : Spring IoC Container 와 MyBatis 연동하기
+
+- MyBatis가 하던 DataBase와 트랝잭션 관리 업무를 Spring IoC Container 넘겨라.
