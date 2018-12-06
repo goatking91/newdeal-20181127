@@ -19,24 +19,24 @@ public class AuthFilter implements Filter {
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
       throws IOException, ServletException {
     
-//    HttpServletRequest httpReq = (HttpServletRequest) request;
-//    HttpServletResponse httpResp = (HttpServletResponse) response;
-//    
-//    String servletPath = httpReq.getServletPath();
-//    
-//    if(!servletPath.startsWith("/auth") && 
-//        !servletPath.endsWith(".html") && 
-//        !servletPath.endsWith(".css") &&
-//        !servletPath.endsWith(".js") &&
-//        !servletPath.endsWith(".png") &&
-//        !servletPath.endsWith(".jpeg")) {
-//      HttpSession session = httpReq.getSession();
-//      Member loginUser = (Member) session.getAttribute("loginUser");
-//      if(loginUser == null) {
-//        httpResp.sendRedirect("/auth/login");
-//        return;
-//      }
-//    }
+    HttpServletRequest httpReq = (HttpServletRequest) request;
+    HttpServletResponse httpResp = (HttpServletResponse) response;
+    
+    String servletPath = httpReq.getServletPath();
+    
+    if(!servletPath.startsWith("/auth") && 
+        !servletPath.endsWith(".html") && 
+        !servletPath.endsWith(".css") &&
+        !servletPath.endsWith(".js") &&
+        !servletPath.endsWith(".png") &&
+        !servletPath.endsWith(".jpeg")) {
+      HttpSession session = httpReq.getSession();
+      Member loginUser = (Member) session.getAttribute("loginUser");
+      if(loginUser == null) {
+        httpResp.sendRedirect("/auth/login");
+        return;
+      }
+    }
 
     chain.doFilter(request, response);
   }
