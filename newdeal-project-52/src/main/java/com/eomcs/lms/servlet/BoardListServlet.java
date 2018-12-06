@@ -1,8 +1,8 @@
 package com.eomcs.lms.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +23,7 @@ import com.eomcs.lms.domain.Board;
 @WebServlet("/board/list")
 public class BoardListServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
-  
+
   BoardDao boardDao;
 
   @Override
@@ -36,7 +36,7 @@ public class BoardListServlet extends HttpServlet {
     ServletContext sc = this.getServletContext();
     ApplicationContext iocContainer = 
         (ApplicationContext) sc.getAttribute("iocContainer");
-    
+
     try {
       boardDao = iocContainer.getBean(BoardDao.class);
     } catch (Exception e) {
@@ -46,27 +46,32 @@ public class BoardListServlet extends HttpServlet {
   }
 
   @Override
-  public void doGet(HttpServletRequest req, HttpServletResponse res)
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
 
-
-    res.setContentType("text/plain;charset=UTF-8");
-    PrintWriter out = res.getWriter();
-    out.println("게시물 목록");
+    /*MIME TYPE
+    Multi-purpose Mail Extension*/
 
     try {
       List<Board> list = boardDao.findAll();
-      for (Board board : list) {
-        out.printf("%3d, %-20s, %s, %d\n", 
-            board.getNo(), 
-            board.getContents(),
-            board.getCreatedDate(), 
-            board.getViewCount());
-      }
+
+      // 게시물 목록을 JSP가 사용할 수 있도록 보관소에 저장한다.
+      request.setAttribute("list", list);
+
+      // JSP로 실행을 위임한다.
+      RequestDispatcher rd =  request.getRequestDispatcher(
+          "/board/list.jsp");
+      
+      // 출력 콘텐트의 타입을 include하는 쪽에서 지정해야 한다.
+      response.setContentType("text/html;charset=UTF-8");
+      rd.include(request, response);
+
 
     } catch (Exception e) {
       e.printStackTrace();
+      throw new ServletException(e);
     }
+
   }
 
 }

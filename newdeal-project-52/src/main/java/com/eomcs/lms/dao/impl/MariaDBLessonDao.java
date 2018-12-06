@@ -2,6 +2,7 @@ package com.eomcs.lms.dao.impl;
 
 import java.sql.DriverManager;
 import java.util.List;
+import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mariadb.jdbc.Driver;
@@ -60,5 +61,12 @@ public class MariaDBLessonDao implements LessonDao {
       return result;
 
     }
+  }
+  @Override
+  public List<Map<String, Object>> findByParticipantNo(int memberNo) {
+    try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+      return sqlSession.selectList("LessonDao.findByParticipantNo", memberNo);
+    }
+    
   }
 }

@@ -31,7 +31,7 @@
   </select>
   
   <select id="findByNo" resultMap="memberMap" parameterType="int">
-	  select name, email, pwd, photo, tel, cdt
+	  select mno, name, email, pwd, photo, tel, cdt
 	  from member
     where mno=#{value}
   </select>

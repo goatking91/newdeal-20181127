@@ -15,6 +15,16 @@
     <result column="mno" property="memberNo"/>
   </resultMap>
   
+  <select id="findByParticipantNo" resultType="hashmap" parameterType="int">
+    select 
+      lm.mno memberNo, 
+      l.lno lessonNo,
+      l.title
+    from les_memb lm
+      join lesson l on lm.lno = l.lno
+    where lm.mno=3
+  </select>
+  
   <select id="findAll" resultMap="lessonMap">
     select
 	    lno,
@@ -26,7 +36,8 @@
   </select>
 	
 	<select id="findByNo" resultMap="lessonMap" parameterType="int">
-    select 
+    select
+      lno, 
       title, 
       cont, 
       sdt, 
